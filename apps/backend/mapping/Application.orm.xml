@@ -1,0 +1,12 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                   https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+    <entity name="App\Entity\Application" table="application">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="grantedStatus" type="boolean" column="granted" />
+        <field name="createdAt" type="datetime" column="created_at" />
+        <many-to-one field="applicant" target-entity="User" inversed-by="applications"></many-to-one>
+        <many-to-many field="votes" target-entity="Vote"></many-to-many>
+    </entity>
+</doctrine-mapping>

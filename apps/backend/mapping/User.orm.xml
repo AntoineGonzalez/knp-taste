@@ -1,0 +1,13 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                   https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+    <entity name="App\Entity\User" table="user">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="username" type="string" length="72" />
+        <field name="email" type="string" length="72" />
+        <one-to-many field="courses" target-entity="Course" mapped-by="author"></one-to-many>
+        <one-to-many field="reports" target-entity="Report" mapped-by="reporter"></one-to-many>
+        <one-to-many field="applications" target-entity="Application" mapped-by="applicant"></one-to-many>
+    </entity>
+</doctrine-mapping>
