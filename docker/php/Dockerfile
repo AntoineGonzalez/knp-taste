@@ -18,11 +18,6 @@ RUN apk add --no-cache \
 
 RUN docker-php-ext-install -j"$(nproc)" fileinfo intl pdo_mysql zip
 
-ENV DOCKERIZE_VERSION v0.6.1
-RUN wget -O dockerize.tar.gz "https://github.com/jwilder/dockerize/releases/download/${DOCKERIZE_VERSION}/dockerize-alpine-linux-amd64-${DOCKERIZE_VERSION}.tar.gz" && \
-    tar -C /usr/local/bin -xzvf dockerize.tar.gz && \
-    rm dockerize.tar.gz
-
 WORKDIR /usr/src/app
  
 COPY --chown=1000:1000 apps/backend /usr/src/app
