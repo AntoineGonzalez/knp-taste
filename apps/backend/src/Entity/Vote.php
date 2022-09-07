@@ -7,9 +7,12 @@ namespace App\Entity;
 use App\Enum\VoteOption;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Uid\Uuid;
 
-class Vote extends Identicable
+class Vote
 {
+    private readonly Uuid $id;
+
     /**
      * @param ?Collection<Application> $applications
      */
@@ -18,6 +21,7 @@ class Vote extends Identicable
         private ?Collection $applications = null,
         private readonly ?DateTimeImmutable $createdAt = null
     ) {
+        $this->id = Uuid::v4();
         $this->value = $value;
         $this->createdAt = $createdAt ? $createdAt : new DateTimeImmutable();
     }

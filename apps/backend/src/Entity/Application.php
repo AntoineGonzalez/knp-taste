@@ -6,20 +6,22 @@ namespace App\Entity;
 
 use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Uid\Uuid;
 
-class Application extends Identicable
+class Application
 {
+    private readonly Uuid $id;
+
     /**
      * @param ?Collection<Vote> $votes
      */
     public function __construct(
-        string $id = null,
         private User $applicant,
         private bool $grantedStatus = false,
         private ?Collection $votes = null,
         private readonly ?DateTimeImmutable $createdAt = null,
     ) {
-        parent::__construct($id);
+        $this->id = Uuid::v4();
         $this->grandedStatus = $grantedStatus;
         $this->applicant = $applicant;
         $this->votes = $votes;

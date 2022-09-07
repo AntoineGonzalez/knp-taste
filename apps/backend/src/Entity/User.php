@@ -5,16 +5,18 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Uid\Uuid;
 
-class User extends Identicable
+class User
 {
+    private readonly Uuid $id;
+
     /**
      * @param ?Collection<Courses> $courses
      * @param ?Collection<Report> $reports
      * @param ?Collection<Application> $applications
      */
     public function __construct(
-        string $id = null,
         private string $username,
         private string $email,
         private string $password,
@@ -22,7 +24,7 @@ class User extends Identicable
         private ?Collection $reports = null,
         private ?Collection $applications = null
     ) {
-        parent::__construct($id);
+        $this->id = Uuid::v4();
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;

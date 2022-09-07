@@ -6,21 +6,23 @@ namespace App\Entity;
 
 use DateTime;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Uid\Uuid;
 
-class Course extends Identicable
+class Course
 {
+    private readonly Uuid $id;
+
     /**
      * @param ?Collection<Report> $reports
      */
     public function __construct(
-        string $id = null,
         private string $name,
         private string $videoUrl,
         private User $author,
         private ?Collection $reports = null,
         private ?DateTime $unpublishedAt = null
     ) {
-        parent::__construct($id);
+        $this->id = Uuid::v4();
         $this->name = $name;
         $this->videoUrl = $videoUrl;
         $this->author = $author;

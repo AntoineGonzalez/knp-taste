@@ -5,16 +5,18 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Symfony\Component\Uid\Uuid;
 
-class Report extends Identicable
+class Report
 {
+    private readonly Uuid $id;
+    
     public function __construct(
-        string $id = null,
         private User $reporter,
         private Course $course,
         private readonly ?DateTimeImmutable $createdAt
     ) {
-        parent::__construct($id);
+        $this->id = Uuid::v4();
         $this->reporter = $reporter;
         $this->course = $course;
         $this->createdAt = $createdAt;
