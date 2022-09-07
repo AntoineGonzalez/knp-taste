@@ -6,24 +6,18 @@ namespace App\Entity;
 
 use DateTimeImmutable;
 
-class Report
+class Report extends Identicable
 {
-
-    private int $id;
-
     public function __construct(
+        string $id = null,
         private User $reporter,
         private Course $course,
-        private ?DateTimeImmutable $createdAt
+        private readonly ?DateTimeImmutable $createdAt
     ) {
+        parent::__construct($id);
         $this->reporter = $reporter;
         $this->course = $course;
         $this->createdAt = $createdAt;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getReporter(): User

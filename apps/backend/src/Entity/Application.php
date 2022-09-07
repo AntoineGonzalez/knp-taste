@@ -5,26 +5,25 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\Collection;
 
-class Application
+class Application extends Identicable
 {
-    private int $id;
-
+    /**
+     * @param ?Collection<Vote> $votes
+     */
     public function __construct(
+        string $id = null,
         private User $applicant,
         private bool $grantedStatus = false,
-        private array $votes = [],
-        private ?DateTimeImmutable $createdAt = null,
+        private ?Collection $votes = null,
+        private readonly ?DateTimeImmutable $createdAt = null,
     ) {
+        parent::__construct($id);
         $this->grandedStatus = $grantedStatus;
         $this->applicant = $applicant;
         $this->votes = $votes;
         $this->$createdAt = $createdAt ? $createdAt : new DateTimeImmutable();
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getApplicant(): User
@@ -37,12 +36,12 @@ class Application
         $this->applicant = $applicant;
     }
 
-    public function getVotes(): array
+    public function getVotes(): ?Collection
     {
         return $this->votes;
     }
 
-    public function setVotes(array $votes): void
+    public function setVotes(?Collection $votes = null): void
     {
         $this->votes = $votes;
     }
@@ -55,5 +54,10 @@ class Application
     public function setGrantedStatus(bool $grantedStatus): void
     {
         $this->grantedStatus = $grantedStatus;
+    }
+
+    public function getCreatedAt(): ?DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 }

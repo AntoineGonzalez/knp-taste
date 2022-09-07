@@ -5,28 +5,27 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\Collection;
 
-class Course
+class Course extends Identicable
 {
-    private int $id;
-
+    /**
+     * @param ?Collection<Report> $reports
+     */
     public function __construct(
+        string $id = null,
         private string $name,
         private string $videoUrl,
         private User $author,
-        private array $reports,
+        private ?Collection $reports = null,
         private ?DateTime $unpublishedAt = null
     ) {
+        parent::__construct($id);
         $this->name = $name;
         $this->videoUrl = $videoUrl;
         $this->author = $author;
         $this->reports = $reports;
         $this->unpublishedAt = $unpublishedAt;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getName(): string
@@ -59,12 +58,12 @@ class Course
         $this->author = $author;
     }
 
-    public function getReports(): array
+    public function getReports(): ?Collection
     {
         return $this->reports;
     }
 
-    public function setReports(array $reports): void
+    public function setReports(?Collection $reports = null): void
     {
         $this->reports = $reports;
     }

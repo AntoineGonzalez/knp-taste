@@ -8,5 +8,5 @@ enum VoteOption
 {
     case Yes;
     case No;
-    case Abstein;
+    case Abstain;
 }

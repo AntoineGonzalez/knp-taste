@@ -6,23 +6,20 @@ namespace App\Entity;
 
 use App\Enum\VoteOption;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\Collection;
 
-class Vote
+class Vote extends Identicable
 {
-    private int $id;
-
+    /**
+     * @param ?Collection<Application> $applications
+     */
     public function __construct(
         private VoteOption $value,
-        private array $applications,
-        private ?DateTimeImmutable $createdAt = null
+        private ?Collection $applications = null,
+        private readonly ?DateTimeImmutable $createdAt = null
     ) {
         $this->value = $value;
         $this->createdAt = $createdAt ? $createdAt : new DateTimeImmutable();
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getValue(): VoteOption
@@ -40,12 +37,12 @@ class Vote
         return $this->createdAt;
     }
 
-    public function getApplications(): array
+    public function getApplications(): ?Collection
     {
         return $this->applications;
     }
 
-    public function setApplications(array $applications): void
+    public function setApplications(?Collection $applications = null): void
     {
         $this->applications = $applications;
     }

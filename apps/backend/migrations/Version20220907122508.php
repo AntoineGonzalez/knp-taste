@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220906161413 extends AbstractMigration
+final class Version20220907122508 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,14 +20,14 @@ final class Version20220906161413 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE application (id INT AUTO_INCREMENT NOT NULL, applicant_id INT DEFAULT NULL, granted TINYINT(1) NOT NULL, created_at DATETIME NOT NULL, INDEX IDX_A45BDDC197139001 (applicant_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE application_vote (application_id INT NOT NULL, vote_id INT NOT NULL, INDEX IDX_ADFCEDEC3E030ACD (application_id), INDEX IDX_ADFCEDEC72DCDAFC (vote_id), PRIMARY KEY(application_id, vote_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE course (id INT AUTO_INCREMENT NOT NULL, author_id INT DEFAULT NULL, name VARCHAR(72) NOT NULL, video_url VARCHAR(72) NOT NULL, unpublished_at DATETIME DEFAULT NULL, INDEX IDX_169E6FB9F675F31B (author_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE report (id INT AUTO_INCREMENT NOT NULL, reporter_id INT DEFAULT NULL, created_at DATETIME NOT NULL, INDEX IDX_C42F7784E1CFE6F5 (reporter_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE report_course (report_id INT NOT NULL, course_id INT NOT NULL, INDEX IDX_3F6DBA264BD2A4C0 (report_id), INDEX IDX_3F6DBA26591CC992 (course_id), PRIMARY KEY(report_id, course_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(72) NOT NULL, email VARCHAR(72) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE vote (id INT AUTO_INCREMENT NOT NULL, value INT NOT NULL, created_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE vote_application (vote_id INT NOT NULL, application_id INT NOT NULL, INDEX IDX_17D6EB9572DCDAFC (vote_id), INDEX IDX_17D6EB953E030ACD (application_id), PRIMARY KEY(vote_id, application_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE application (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', applicant_id BINARY(16) DEFAULT NULL COMMENT \'(DC2Type:uuid)\', granted TINYINT(1) NOT NULL, created_at DATETIME NOT NULL, INDEX IDX_A45BDDC197139001 (applicant_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE application_vote (application_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', vote_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_ADFCEDEC3E030ACD (application_id), INDEX IDX_ADFCEDEC72DCDAFC (vote_id), PRIMARY KEY(application_id, vote_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE course (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', author_id BINARY(16) DEFAULT NULL COMMENT \'(DC2Type:uuid)\', name VARCHAR(72) NOT NULL, video_url VARCHAR(72) NOT NULL, unpublished_at DATETIME DEFAULT NULL, INDEX IDX_169E6FB9F675F31B (author_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE report (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', reporter_id BINARY(16) DEFAULT NULL COMMENT \'(DC2Type:uuid)\', created_at DATETIME NOT NULL, INDEX IDX_C42F7784E1CFE6F5 (reporter_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE report_course (report_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', course_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_3F6DBA264BD2A4C0 (report_id), INDEX IDX_3F6DBA26591CC992 (course_id), PRIMARY KEY(report_id, course_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', username VARCHAR(72) NOT NULL, email VARCHAR(72) NOT NULL, password VARCHAR(60) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE vote (id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', value INT NOT NULL, created_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE vote_application (vote_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', application_id BINARY(16) NOT NULL COMMENT \'(DC2Type:uuid)\', INDEX IDX_17D6EB9572DCDAFC (vote_id), INDEX IDX_17D6EB953E030ACD (application_id), PRIMARY KEY(vote_id, application_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE application ADD CONSTRAINT FK_A45BDDC197139001 FOREIGN KEY (applicant_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE application_vote ADD CONSTRAINT FK_ADFCEDEC3E030ACD FOREIGN KEY (application_id) REFERENCES application (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE application_vote ADD CONSTRAINT FK_ADFCEDEC72DCDAFC FOREIGN KEY (vote_id) REFERENCES vote (id) ON DELETE CASCADE');
