@@ -50,7 +50,7 @@ class User extends Identicable
     {
         $this->email = $email;
     }
-    
+
     public function getCourses(): ?Collection
     {
         return $this->courses;
@@ -81,12 +81,12 @@ class User extends Identicable
         $this->applications = $applications;
     }
 
-    public function getPassword(): string 
+    public function getPassword(): string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password) :void
+    public function setPassword(string $password): void
     {
         $this->password = $password;
     }
