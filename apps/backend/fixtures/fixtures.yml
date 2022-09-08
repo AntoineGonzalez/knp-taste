@@ -1,0 +1,6 @@
+App\Entity\User:
+  user{1..10}:
+    __construct: 
+      username: '<username()>'
+      email (unique): '<email()>'
+      password: '\$2y\$10\$8N9rgJBZzhjqVKiXTUjXk.emOAfDYmBQQYOgWl4wvqCv7Nbk4tQ2e'

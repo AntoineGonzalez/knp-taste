@@ -6,6 +6,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: example
+    ports:
+      - '3306:3306'
   nginx:
     image: nginx:1.19.0-alpine
     restart: on-failure
