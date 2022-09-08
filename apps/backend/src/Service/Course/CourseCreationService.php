@@ -12,7 +12,6 @@ use Doctrine\ORM\EntityManagerInterface;
 class CourseCreationService
 {
     public function __construct(
-        private CourseRepository $courseRepository,
         private EntityManagerInterface $entityManager
     ) {
     }
