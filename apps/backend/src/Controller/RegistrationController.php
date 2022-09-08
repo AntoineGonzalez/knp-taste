@@ -13,11 +13,12 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function index(Request $request, RegistrationService $registrationService)
+    public function index(Request $request, RegistrationService $registrationService): Response
     {
         $form = $this->createFormBuilder()
             ->add('email', EmailType::class, [

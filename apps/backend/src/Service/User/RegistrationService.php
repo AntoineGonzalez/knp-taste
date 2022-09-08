@@ -19,7 +19,7 @@ class RegistrationService
     ) {
     }
 
-    public function registerUser(array $userData)
+    public function registerUser(array $userData): void
     {
         $users = $this->userRepository->findBy(['email' => $userData['email']]);
 
