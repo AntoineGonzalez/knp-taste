@@ -1,10 +1,23 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    login            
+    Course List            
 {% endblock %}
+
 {% block main %}
-    <h4>
-        Course
-    </h4>
+
+    <section>
+        <header style="
+            display:flex;
+            justify-content: space-between;
+            align-items:center;"
+        >
+            <h4>
+                Course List                
+            </h4>
+            <a href="/course/create"> Create new course</a>
+        </header>
+        <body></body>
+
+    </section>
 {% endblock %}
