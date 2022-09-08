@@ -21,9 +21,9 @@ class RegistrationService
 
     public function registerUser(array $userData)
     {
-        $users = $this->userRepository->findBy(['email' => $userData['email']]);
+        $user = $this->userRepository->findOneBy(['email' => $userData['email']]);
 
-        if (sizeof($users) > 0) {
+        if ($user) {
             throw new InvalidArgumentException('The User email is already used');
         }
 
