@@ -14,28 +14,5 @@
         >
             <generator strategy="IDENTITY" />
         </id>
-        
-        <field 
-            name="grantedStatus" 
-            type="boolean" 
-            column="granted" 
-        />
-        
-        <field 
-            name="createdAt" 
-            type="datetime" 
-            column="created_at" 
-        />
-        
-        <many-to-one 
-            field="applicant" 
-            target-entity="User" 
-            inversed-by="applications"
-        />
-        
-        <many-to-many 
-            field="votes" 
-            target-entity="Vote"
-        />
     </entity>
 </doctrine-mapping>

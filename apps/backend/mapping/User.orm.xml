@@ -33,22 +33,5 @@
             type="string" 
             length="60"
         />
-    
-        <one-to-many
-            field="courses" 
-            target-entity="Course" 
-            mapped-by="author"
-        />
-
-        <one-to-many 
-            field="reports"
-            target-entity="Report"
-            mapped-by="reporter" 
-        />
-        <one-to-many 
-            field="applications" 
-            target-entity="Application" 
-            mapped-by="applicant"
-        />
     </entity>
 </doctrine-mapping>

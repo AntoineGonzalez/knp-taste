@@ -14,38 +14,5 @@
         >
             <generator strategy="IDENTITY" />
         </id>
-
-        <field 
-            name="name" 
-            type="string"
-            length="72"
-        />
-
-        <field 
-            name="videoUrl" 
-            type="string" 
-            column="video_url" 
-            length="72"
-        />
-
-        <field 
-            name="unpublishedAt"
-            type="datetime"
-            column="unpublished_at"
-            nullable="true"
-        />
-        
-        <many-to-one 
-            field="author"
-            target-entity="User"
-            inversed-by="courses"
-        />
-        
-        
-        <one-to-many 
-            field="reports" 
-            target-entity="Report" 
-            mapped-by="course" 
-        />
     </entity>
 </doctrine-mapping>

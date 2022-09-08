@@ -11,26 +11,12 @@ class User
 {
     private readonly Uuid $id;
 
-    /**
-     * @param ?Collection<Courses> $courses
-     * @param ?Collection<Report> $reports
-     * @param ?Collection<Application> $applications
-     */
     public function __construct(
         private string $username,
         private string $email,
         private string $password,
-        private ?Collection $courses = null,
-        private ?Collection $reports = null,
-        private ?Collection $applications = null
     ) {
         $this->id = Uuid::v4();
-        $this->username = $username;
-        $this->email = $email;
-        $this->password = $password;
-        $this->courses = $courses;
-        $this->reports = $reports;
-        $this->applications = $applications;
     }
 
     public function getUsername(): string
@@ -38,49 +24,9 @@ class User
         return $this->email;
     }
 
-    public function setUsername(string $username): void
-    {
-        $this->username = $username;
-    }
-
     public function getEmail(): string
     {
         return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-    public function getCourses(): ?Collection
-    {
-        return $this->courses;
-    }
-
-    public function setCourses(?Collection $courses = null): void
-    {
-        $this->courses = $courses;
-    }
-
-    public function getReports(): ?Collection
-    {
-        return $this->reports;
-    }
-
-    public function setReports(?Collection $reports = null): void
-    {
-        $this->reports = $reports;
-    }
-
-    public function getApplications(): ?Collection
-    {
-        return $this->applications;
-    }
-
-    public function setApplications(Collection $applications): void
-    {
-        $this->applications = $applications;
     }
 
     public function getPassword(): string

@@ -14,23 +14,5 @@
         >
             <generator strategy="IDENTITY" />
         </id>
-
-        <field 
-            name="createdAt" 
-            type="datetime"
-            column="created_at" 
-        />
-
-        <many-to-one 
-            field="reporter"
-            target-entity="User"
-            inversed-by="reports"
-        />
-
-        <many-to-many 
-            field="course" 
-            target-entity="Course"
-            inversed-by="reports" 
-        />
     </entity>
 </doctrine-mapping>
