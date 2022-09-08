@@ -6,7 +6,6 @@ namespace App\Service\Course;
 
 use App\Entity\Course;
 use App\Entity\User;
-use App\Repository\Course\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CourseCreationService
