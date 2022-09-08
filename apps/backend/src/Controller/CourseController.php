@@ -30,7 +30,7 @@ class CourseController extends AbstractController
 
         $form = $this->createFormBuilder()
             ->add('name', TextType::class, [
-                'label' => "Course name",
+                'label' => "Intitullé du cours",
                 'required' => true,
             ])
             ->add('videoUrl', UrlType::class, [
