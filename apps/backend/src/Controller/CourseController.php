@@ -6,7 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Course;
 use App\FormType\CourseType;
-use App\Service\Course\CourseListingService;
+use App\Repository\Course\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,11 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class CourseController extends AbstractController
 {
     #[Route('/course', name: 'app_course')]
-    public function index(CourseListingService $courseListingService): Response
+    public function index(CourseRepository $courseRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $courses = $courseListingService->index();
+        $courses = $courseRepository->findAll();
 
         return $this->render('course/index.html.twig', [
             'courses' => $courses
