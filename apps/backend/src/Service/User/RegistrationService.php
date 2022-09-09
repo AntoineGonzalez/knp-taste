@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Service\User;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
+use App\Repository\User\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -19,7 +19,7 @@ class RegistrationService
     ) {
     }
 
-    public function registerUser(array $userData)
+    public function registerUser(array $userData): void
     {
         $user = $this->userRepository->findOneBy(['email' => $userData['email']]);
 
@@ -38,7 +38,7 @@ class RegistrationService
         );
 
         $user->setPassword($hashedPassword);
-    
+
         $this->entityManager->persist($user);
         $this->entityManager->flush($user);
     }

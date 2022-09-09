@@ -13,4 +13,3 @@ App\Entity\User:
     __calls:
         # password
         - setPassword: ['\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2']
-

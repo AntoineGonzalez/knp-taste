@@ -14,7 +14,7 @@
     </head>
     <body>
         {% block body %}
-            <header>
+            <header style="width:90%; margin:auto;display:flex; justify-content: space-between;">
                 {% block header %}
                 <div>
                     {% if app.user %}
@@ -33,7 +33,7 @@
                 </nav>
                 {% endblock %}
             </header>
-            <main>
+            <main style="width:75%; margin:auto">
                 {% block main %}{% endblock %}
             </main>
     {% endblock %}

@@ -5,7 +5,7 @@
 {% endblock %}
 {% block main %}
     <h4>
-        Login page
+        Page de connexion
     </h4>
 
     {% if error %}
@@ -21,14 +21,14 @@
         <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
         <label for="password">
-            Password:
+            Mot de passe:
         </label>
         <input type="password" id="password" name="_password" />
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
 
         <button type="submit">
-            login      
+            Connexion      
         </button>
     </form>
 {% endblock %}
