@@ -32,5 +32,10 @@
             type="string" 
             length="60"
         />
+
+        <field 
+            name="isAdmin" 
+            type="boolean"
+        />
     </entity>
 </doctrine-mapping>
