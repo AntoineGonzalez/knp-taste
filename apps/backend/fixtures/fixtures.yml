@@ -3,7 +3,6 @@ App\Entity\User:
     __construct:
       username: '<username()>'
       email (unique): '<email()>'
-      isAdmin: false
     __calls:
         # password
         - setPassword: ['\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2']
@@ -11,15 +10,6 @@ App\Entity\User:
     __construct:
       username: 'user'
       email (unique): 'user@knplabs.com'
-      isAdmin: false
-    __calls:
-        # password
-        - setPassword: ['\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2']
-  adminUser:
-    __construct:
-      username: 'adminUser'
-      email (unique): 'adminuser@knplabs.com'
-      isAdmin: true
     __calls:
         # password
         - setPassword: ['\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2']
