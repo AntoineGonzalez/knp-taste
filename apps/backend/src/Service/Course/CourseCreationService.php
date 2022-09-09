@@ -15,7 +15,7 @@ class CourseCreationService
     ) {
     }
 
-    public function create(User $author, array $courseData) :void
+    public function create(User $author, array $courseData): void
     {
         $course = new Course(
             $courseData['name'],

@@ -38,11 +38,5 @@
             target-entity="User"
             inversed-by="courses"
         />
-
-        <one-to-many
-            field="reports"
-            target-entity="Report" 
-            mapped-by="course"
-        />
     </entity>
 </doctrine-mapping>
