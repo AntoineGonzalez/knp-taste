@@ -15,8 +15,6 @@ class CourseController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $user = $this->getUser();
-
         return $this->render('course/index.html.twig');
     }
 }
