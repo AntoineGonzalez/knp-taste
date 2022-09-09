@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\Course\CourseCreationService;
+use App\Service\Course\CourseListingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,11 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class CourseController extends AbstractController
 {
     #[Route('/course', name: 'app_course')]
-    public function index(): Response
+    public function index(Request $request, CourseListingService $courseListingService): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        return $this->render('course/index.html.twig');
+        $courses = $courseListingService->index();
+
+        return $this->render('course/index.html.twig', [
+            'courses' => $courses
+        ]);
     }
 
     #[Route('/course/create', name: 'app_course_create')]
