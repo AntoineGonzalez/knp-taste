@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Sign in
+{% endblock %}
+{% block main %}
+    <h4>
+        Sign in
+    </h4>
+
+    <hr/>
+
+    {{ form(form) }}
+            
+    {% if errorMessage %}
+        <p style="color:red">
+            {{errorMessage}}
+        </p>
+    {% endif %}
+{% endblock %}

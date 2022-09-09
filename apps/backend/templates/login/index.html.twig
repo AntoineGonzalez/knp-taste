@@ -9,9 +9,9 @@
     </h4>
 
     {% if error %}
-        <div>
+        <p style="color:red">
             {{ error.messageKey|trans(error.messageData, 'security') }}
-        </div>
+        </p>
     {% endif %}
 
     <form action="{{ path('app_login') }}" method="post">

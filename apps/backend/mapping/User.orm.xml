@@ -12,7 +12,6 @@
             type="uuid" 
             column="id"
         >
-            <generator strategy="IDENTITY" />
         </id>
 
         <field 
