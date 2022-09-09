@@ -4,47 +4,50 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Service\User\RegistrationService;
+use App\Entity\User;
+use App\FormType\RegistrationType;
+use App\Repository\User\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
+use InvalidArgumentException;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function index(Request $request, RegistrationService $registrationService): Response
-    {
-        $form = $this->createFormBuilder()
-            ->add('email', EmailType::class, [
-                'label' => "Adresse mail",
-                'required' => true,
-            ])
-            ->add('username', TextType::class, [
-                'required' => true,
-                'label' => "Nom d'utilisateur"
-            ])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'Les mots de passes doivent être identique.',
-                'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmation du mot de passe'],
-            ])
-            ->add('save', SubmitType::class, ['label' => 'S\'inscrire !'])
-            ->getForm();
-
+    public function register(
+        Request $request,
+        UserRepository $userRepository,
+        EntityManagerInterface $entityManager,
+        PasswordHasherFactoryInterface $passwordHasherFactory
+    ): Response {
+        $form = $this->createForm(RegistrationType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
             try {
-                $registrationService->registerUser((array) $form->getData());
+                $user = $userRepository->findOneBy(['email' => $data['email']]);
+
+                if ($user) {
+                    throw new InvalidArgumentException('The User email is already used');
+                }
+
+                $passwordHasher = $passwordHasherFactory->getPasswordHasher(User::class);
+                $passwordHash = $passwordHasher->hash($data['password']);
+
+                $user = new User(
+                    $data['username'],
+                    $data['email'],
+                    $passwordHash
+                );
+
+                $entityManager->persist($user);
+                $entityManager->flush($user);
             } catch (\InvalidArgumentException $exception) {
                 $errorMessage = $exception->getMessage();
 
@@ -53,7 +56,6 @@ class RegistrationController extends AbstractController
                     'errorMessage' => $errorMessage
                 ]);
             }
-
 
             return $this->redirectToRoute('app_login');
         }

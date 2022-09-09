@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Service\Course\CourseCreationService;
+use App\Entity\Course;
+use App\FormType\CourseType;
 use App\Service\Course\CourseListingService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CourseController extends AbstractController
 {
     #[Route('/course', name: 'app_course')]
-    public function index(Request $request, CourseListingService $courseListingService): Response
+    public function index(CourseListingService $courseListingService): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -29,26 +28,24 @@ class CourseController extends AbstractController
     }
 
     #[Route('/course/create', name: 'app_course_create')]
-    public function create(Request $request, CourseCreationService $courseCreationService): Response
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        $form = $this->createFormBuilder()
-            ->add('name', TextType::class, [
-                'label' => "Intitullé du cours",
-                'required' => true,
-            ])
-            ->add('videoUrl', UrlType::class, [
-                'required' => true,
-                'label' => "Url de la video"
-            ])
-            ->add('save', SubmitType::class, ['label' => 'Enregistrer'])
-            ->getForm();
-
+        $form = $this->createForm(CourseType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $courseCreationService->create($this->getUser(), (array) $form->getData());
+            $data = $form->getData();
+
+            $course = new Course(
+                $data['name'],
+                $data['videoUrl'],
+                $this->getUser(),
+            );
+
+            $entityManager->persist($course);
+            $entityManager->flush($course);
 
             return $this->redirectToRoute('app_course');
         }
