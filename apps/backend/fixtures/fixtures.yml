@@ -13,3 +13,10 @@ App\Entity\User:
     __calls:
         # password
         - setPassword: ['\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2']
+
+App\Entity\Course:
+  course{1..10}:
+    __construct:
+      name: '<name()>'
+      author: '@user*'
+      videoUrl: 'http://127.0.0.1'

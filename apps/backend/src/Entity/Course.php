@@ -23,4 +23,9 @@ class Course
     ) {
         $this->id = Uuid::v4();
     }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
 }

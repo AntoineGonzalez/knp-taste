@@ -23,7 +23,7 @@
             name="videoUrl"
             type="string"
             column="video_url"
-            length="72"
+            length="244"
         />
 
         <field 

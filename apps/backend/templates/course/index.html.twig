@@ -5,19 +5,25 @@
 {% endblock %}
 
 {% block main %}
-
     <section>
         <header style="
             display:flex;
             justify-content: space-between;
             align-items:center;"
         >
+        <div>
             <h4>
                 Listes de cours                
             </h4>
+        </div>
             <a href="/course/create">Poster un nouveau cours</a>
         </header>
-        <body></body>
-
+        <body>
+            <ol>
+                {% for course in courses %}
+                    <li> {{ course.name }}</li>
+                {% endfor %}
+            <ol>
+        </body>
     </section>
 {% endblock %}
