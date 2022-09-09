@@ -1,15 +1,13 @@
 App\Entity\User:
   user{1..10}:
     __construct:
-      username: '<username()>'
-      email (unique): '<email()>'
-    __calls:
-        # password
-        - setPassword: ['\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2']
+      username: "<username()>"
+      email (unique): "<email()>"
+      # plain : password
+      password: '\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2'
   user:
     __construct:
-      username: 'user'
-      email (unique): 'user@knplabs.com'
-    __calls:
-        # password
-        - setPassword: ['\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2']
+      username: "user"
+      email (unique): "user@knplabs.com"
+      # plain : password
+      password: '\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2'
