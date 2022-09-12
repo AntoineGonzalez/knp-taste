@@ -7,9 +7,14 @@ namespace App\Service;
 use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 
 class CourseGuardService
 {
+    public function __construct(private ContainerBagInterface $params)
+    {
+    }
+
     /**
      * Check wether or not a user can access course page
      * 
@@ -22,7 +27,7 @@ class CourseGuardService
         $lastUserAccess = $authUser->getLastCourseAccessedAt();
 
         return in_array('ROLE_ADMIN', $authUser->getRoles()) ||
-            $authUser->getCourseVisitCounter() < 10 ||
-            $currentDatetime->diff($lastUserAccess)->s > 10;
+            $authUser->getCourseVisitCounter() < $this->params->get('course_access.visit_limit') ||
+            $currentDatetime->diff($lastUserAccess)->d > $this->params->get('course_access.time_limit');
     }
 }

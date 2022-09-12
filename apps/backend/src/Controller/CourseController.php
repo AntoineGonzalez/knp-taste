@@ -39,7 +39,7 @@ class CourseController extends AbstractController
         CourseGuardService $courseGuardService,
         EntityManagerInterface $entityManager
     ): Response {
-        $user = $userRepository->findOneBy(['id' => $this->getUser()->getId()]);
+        $user = $userRepository->findOneBy(['email' => $this->getUser()->getUserIdentifier()]);
 
         if ($courseGuardService->checkAccess($user)) {
             $user->incrementVisitCounter();
