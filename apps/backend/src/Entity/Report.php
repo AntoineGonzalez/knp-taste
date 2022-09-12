@@ -8,7 +8,7 @@ use Symfony\Component\Uid\Uuid;
 
 class Report
 {
-    private readonly Uuid $id;
+    private Uuid $id;
 
     public function __construct()
     {

@@ -11,7 +11,7 @@ use Symfony\Component\Uid\Uuid;
 
 class Vote
 {
-    private readonly Uuid $id;
+    private Uuid $id;
 
     /**
      * @param ?Collection<Application> $applications

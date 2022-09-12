@@ -21,7 +21,7 @@
         <body>
             <ol>
                 {% for course in courses %}
-                    <li> {{ course.name }}</li>
+                    <li><a href="/course/{{ course.id }}"> {{ course.name }} </a></li>
                 {% endfor %}
             <ol>
         </body>

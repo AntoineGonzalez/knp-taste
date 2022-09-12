@@ -32,5 +32,21 @@
             type="string" 
             length="60"
         />
+
+        <field 
+            name="isAdmin" 
+            type="boolean"
+        />
+
+        <field 
+            name="lastCourseAccessedAt"
+            type="datetime"
+            nullable="true"
+        />
+
+        <field 
+            name="courseVisitCounter"
+            type="integer"
+        />
     </entity>
 </doctrine-mapping>

@@ -10,7 +10,7 @@ use Symfony\Component\Uid\Uuid;
 
 class Course
 {
-    private readonly Uuid $id;
+    private Uuid $id;
 
     /**
      * @param ?Collection<Report> $reports
@@ -24,8 +24,23 @@ class Course
         $this->id = Uuid::v4();
     }
 
+    public function getId(): Uuid
+    {
+        return $this->id;
+    }
+
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getVideoUrl(): string
+    {
+        return $this->videoUrl;
+    }
+
+    public function getAuthor(): User
+    {
+        return $this->author;
     }
 }

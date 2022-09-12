@@ -3,12 +3,21 @@ App\Entity\User:
     __construct:
       username: "<username()>"
       email (unique): "<email()>"
+      isAdmin: false
       # plain : password
       password: '\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2'
   user:
     __construct:
       username: "user"
       email (unique): "user@knplabs.com"
+      isAdmin: false
+      # plain : password
+      password: '\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2'
+  adminuser:
+    __construct:
+      username: "adminuser"
+      email (unique): "adminuser@knplabs.com"
+      isAdmin: true
       # plain : password
       password: '\$2y\$10\$ci00VRrjkFz7uhyCRoKiFe8bcoPbbTQOcfUM0s918w7EZz9w0j.G2'
       

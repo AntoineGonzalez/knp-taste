@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Course List            
+{% endblock %}
+
+{% block main %}
+    <section>
+        <header style="
+            display:flex;
+            justify-content: space-between;
+            align-items:center;"
+        >
+            <div>
+                <h4>
+                    {{ course.name }} publié par {{ course.author.username }}                
+                </h4>
+            </div>
+        </header>
+        <body>
+            {% if is_granted('ROLE_ADMIN') %}
+                <video src="{{ course.videoUrl }}" controls></video>
+            {% endif %}
+        </body>
+    </section>
+{% endblock %}
